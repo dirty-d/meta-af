@@ -1,0 +1,4 @@
+class ${class_info.class_name}${(base_name) ? `: public ${base_name}` : ''} {
+public:
+    static constexpr const char *class_name = "${class_info.class_name}";
+    static constexpr const uint32_t class_hash = ${class_info.class_hash};

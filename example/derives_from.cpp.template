@@ -1,0 +1,3 @@
+virtual bool _derives_from(${type} *) {
+    return ${return_value};
+}

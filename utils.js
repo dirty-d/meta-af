@@ -9,7 +9,12 @@ module.exports.ensureGlobal = function(type) {
 }
 
 module.exports.indentLines = function(arr, indent_level, indent_char) {
+    if(indent_char === undefined) {
+        indent_char = ' '
+    }
+
     let indent = indent_char.repeat(indent_level)
+
     return '\n' + arr.map((x) => indent + x).join('\n') + '\n' + indent
 }
 
@@ -35,4 +40,15 @@ module.exports.defineEnumClass = function(meta, name) {
 
         return module.exports.indentLines(lines, meta.indent_level, ' ')
     })
+}
+
+module.exports.stringTemplate = function(template, params) {
+    let body = 'return ' + '`' + template + '`'
+    let paramNames = Object.keys(params)
+    let paramValues = paramNames.map((x) => params[x])
+
+    paramNames.push(body)
+
+    let f = Function.apply(this, paramNames)
+    return f.apply(f, paramValues)
 }
