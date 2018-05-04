@@ -14,9 +14,9 @@ $*/
 /*$
     global.className = 'BlahPlayer'
     let gameUtils = require('./example/gameUtils')
-    return gameUtils.declareObjectClass(meta, global.className, 'Object')
+    return gameUtils.declareObjectClass(meta, global.className, 'Player')
 $*/
-class BlahPlayer: public Object {
+class BlahPlayer: public Player {
 public:
     static constexpr const char *class_name = "BlahPlayer";
     static constexpr const uint32_t class_hash = 2222639227;
@@ -27,6 +27,10 @@ public:
         return gameUtils.declareDerivesFrom(meta, global.className)
     $*/
     virtual bool _derives_from(BlahPlayer *) {
+        return true;
+    }
+    
+    virtual bool _derives_from(Player *) {
         return true;
     }
     
