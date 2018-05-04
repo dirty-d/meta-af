@@ -20,7 +20,7 @@ module.exports.appendEnumClass = function(meta, name, value) {
         global.enums.set(name, [])
     }
 
-    global.enums.get(name).push(value)
+    global.enums.get(name).push({value: value, meta: meta})
 }
 
 module.exports.defineEnumClass = function(meta, name) {
@@ -28,9 +28,9 @@ module.exports.defineEnumClass = function(meta, name) {
         let lines = []
 
         lines.push(`enum class ${name} {`)
-        let values = global.enums.get(name).join(',').split(/(?<=,)/g)
-
-        lines = lines.concat(values.map((x) => `    ${x}`))
+        let values = global.enums.get(name)
+        values = values.map((x, i, a) => `    ${x.value + ((i == a.length - 1) ? '' : ',')} //${x.meta.file_name}:${global.lineTag(x.meta.expression_id)}`)
+        lines = lines.concat(values)
         lines.push('};')
 
         return module.exports.indentLines(lines, meta.indent_level, ' ')

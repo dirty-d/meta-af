@@ -61,6 +61,10 @@ global.stage = async function(stage, cb) {
     return result
 }
 
+global.lineTag = function (expressionId) {
+    return `${SourceCode.expressionIdTagRefStart}${expressionId}${SourceCode.expressionIdTagRefEnd}`
+}
+
 String.prototype.indexesOf = function(pattern) {
     let indexes = []
     let index = 0
@@ -81,10 +85,8 @@ String.prototype.indexesOf = function(pattern) {
 
 function evaluate(expression) {
     return new Promise(function (resolve, reject) {
-        AsyncFunction('line_tag', 'stage', 'meta', 'require', expression.expr)(
-            function (expressionId) {
-                return `${SourceCode.expressionIdTagRefStart}${expressionId}${SourceCode.expressionIdTagRefEnd}`
-            },
+        AsyncFunction('lineTag', 'stage', 'meta', 'require', expression.expr)(
+            global.lineTag,
             global.stage,
             expression.meta,
             require

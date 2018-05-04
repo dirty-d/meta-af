@@ -19,9 +19,9 @@ $*//*@*/
     return utils.defineEnumClass(meta, 'Things')
 $*/
 enum class Things {
-    Something,
-    AnotherThing,
-    SomethingElse
+    Something, //example.cpp:12
+    AnotherThing, //example.cpp:28
+    SomethingElse //example.h:4
 };
 /*@*/
 
