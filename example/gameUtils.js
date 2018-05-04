@@ -24,6 +24,7 @@ class GameUtils {
 
     declareObjectClass(meta, className, baseName, salt = '') {
         let classInfo = {
+            meta: meta,
             class_name: className,
             class_hash: this.fnv_1a32(className, salt),
             base: () => this.objectClasses.get(baseName)
@@ -103,7 +104,7 @@ class GameUtils {
     includeObjectClasses(meta) {
         return global.stage(1, () => {
             return utils.indentLines(
-                Array.from(this.objectClasses.values()).map((x) => `#include <${x.class_name}.h>`),
+                Array.from(this.objectClasses.values()).map((x) => `#include <${x.class_name}.h> //${x.meta.file_name}:${global.lineTag(x.meta.expression_id)})`),
                 meta.indent_level,
                 ' '
             )

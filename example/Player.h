@@ -5,10 +5,10 @@
     let gameUtils = require('./example/gameUtils')
     return gameUtils.includeObjectClasses(meta)
 $*/
-#include <BlahPlayer.h>
-#include <Game.h>
-#include <Object.h>
-#include <Player.h>
+#include <BlahPlayer.h> //BlahPlayer.h:14)
+#include <Game.h> //Game.h:14)
+#include <Object.h> //Object.h:27)
+#include <Player.h> //Player.h:14)
 /*@*/
 
 /*$
